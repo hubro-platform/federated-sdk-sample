@@ -1,0 +1,26 @@
+[package]
+name = "federated-sample"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+#linfa = "0.7.0"
+#linfa-linear = "0.7.0"
+#linfa-datasets = { version = "0.7.0", features = ["diabetes"] }
+#ndarray = "0.15.6"
+polars = { version = "0.41.3", default-features=false, features = ["csv", "strings", "ndarray", "temporal", "lazy", "describe"]}
+#polars = { version = "0.41.3", default-features=false, features = ["strings", "lazy"]}
+hubro-sdk = { version = "0.9.1", features = ["mobile"]}
+#hubro-sdk = { version = "0.9.0", path = "../hubro-sdk", features = ["mobile"] }
+wasip1 = "1.0.0"
+
+[profile.release]
+opt-level = "s"
+#lto = true                # Link Time Optimization
+#codegen-units = 1         # Better optimizations, slower compile
+#panic = "abort"           # Remove unwinding
+#strip = true              # Removes debug symbols (Rust 1.59+)
+#incremental = false       # Clean output, no cache
