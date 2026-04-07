@@ -11,7 +11,11 @@ crate-type = ["cdylib"]
 #linfa-linear = "0.7.0"
 #linfa-datasets = { version = "0.7.0", features = ["diabetes"] }
 #ndarray = "0.15.6"
-polars = { version = "0.41.3", default-features=false, features = ["csv", "strings", "ndarray", "temporal", "lazy", "describe"]}
+polars = { version = "0.41.3", default-features=false, features = [
+    "lazy",
+    "strings"
+]}
+#polars = { version = "0.41.3", default-features=false, features = ["csv", "strings", "ndarray", "temporal", "lazy", "describe"]}
 #polars = { version = "0.41.3", default-features=false, features = ["strings", "lazy"]}
 hubro-sdk = { version = "0.9.1", features = ["mobile"]}
 #hubro-sdk = { version = "0.9.1", path = "../hubro-sdk", features = ["mobile"] }
