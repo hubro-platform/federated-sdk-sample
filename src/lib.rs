@@ -31,7 +31,6 @@ unsafe extern "C" fn fit() -> i32 {
     let step_series = Series::new("steps", data.iter().map(|p| p.count).collect::<Vec<u32>>());
 
     // 3. Construct DataFrame and IMMEDIATELY drop the source 'data'
-    // This is the most critical step to avoid 512MB OOM
     let df = DataFrame::new(vec![date_series, step_series]).unwrap();
     drop(data);
     debug_print_line(&"Raw data dropped, starting Polars aggregation...".to_string());
@@ -67,15 +66,3 @@ unsafe extern "C" fn fit() -> i32 {
 pub extern "C" fn fit_training(training_data: TrainingData) -> i32 {
     0
 }
-
-// #[no_mangle]
-// pub extern "C" fn addx(left: i32, right: i32) -> i32 {
-//     3
-// let dataset = linfa_datasets::diabetes();
-//
-// let lin_reg = TweedieRegressor::params().power(0.).alpha(0.);
-// let model = lin_reg.fit(&dataset).unwrap();
-// let s3 = unsafe { push_result(4.5) };
-// let s4 = unsafe { str_test("fds") };
-//     3
-// }
