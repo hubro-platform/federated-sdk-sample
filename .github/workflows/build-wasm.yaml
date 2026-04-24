@@ -43,20 +43,20 @@ jobs:
       - name: Build WASM
         run: cargo build --target wasm32-wasip1 --release
 
-      - name: Install wasm-opt
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y binaryen
-
-      - name: Optimize WASM with wasm-opt
-        run: |
-          wasm-opt --all-features -Oz -o target/wasm32-wasip1/release/optimized.wasm target/wasm32-wasip1/release/federated_sample.wasm
+#      - name: Install wasm-opt
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y binaryen
+#
+#      - name: Optimize WASM with wasm-opt
+#        run: |
+#          wasm-opt --all-features -Oz -o target/wasm32-wasip1/release/optimized.wasm target/wasm32-wasip1/release/federated_sample.wasm
 
       - name: Upload WASM artifact
         uses: actions/upload-artifact@v4
         with:
           name: federated-sample-wasm
-          path: target/wasm32-wasip1/release/optimized.wasm
+          path: target/wasm32-wasip1/release/federated_sample.wasm
           retention-days: 90
 
       - name: Extract version from Cargo.toml
@@ -73,6 +73,6 @@ jobs:
           name: Release v${{ steps.get_version.outputs.version }}
           draft: false
           prerelease: false
-          files: target/wasm32-wasip1/release/optimized.wasm
+          files: target/wasm32-wasip1/release/federated_sample.wasm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
